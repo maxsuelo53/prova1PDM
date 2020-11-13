@@ -1,0 +1,83 @@
+body{
+	background-color: #7c4dff;
+	font-family: sans-serif;
+}
+
+
+.cartao h1{
+	text-transform: uppercase;
+	color: #7c4dff;
+}
+
+.cartao{
+	border-radius: 25px;
+	background: white;
+	text-align: center;
+}
+
+.cartao input[type = "text"]{
+	border:0;
+	background: #7c4dff;
+	display: block;
+	margin: 10px auto 35px auto;
+	text-align: center;
+	border: 2px solid #3498db;
+	padding: 14px 10px;
+	width: 200px;
+	height: 20px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+
+.cartao input[type = "text"]:focus{
+	width: 240px;
+  	border-color: #2ecc71;
+}
+
+.titulo{
+	font-size: 15px;
+	color: rgb(46, 46, 46);
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.titulo-contato{
+	font-size: 15px;
+	color: #7c4dff;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align:center;
+}
+
+.botao{
+	border-radius: 50px;
+	margin-top:30px;
+	margin-bottom: 20px;
+	width: 100px;
+	height: 40px;
+	text-align:center;
+	font-weight: bold;
+	border: 2px solid #3498db;
+	transition: 0.25s;
+}
+
+.botao:hover{
+	width: 110px;
+  	border-color: #2ecc71;
+}
+
+.icone{
+	color: #7c4dff;
+	text-align: center;
+}
+
+.iconedel{
+	color: #7c4dff;
+	padding:0px;
+}
+
+.lista{
+	text-align: left;
+}
