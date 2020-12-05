@@ -1,54 +1,60 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyBVt99EqencDOWJlFLoQ6z5Wa80GiDF6Yg",
+    authDomain: "prova1-96428.firebaseapp.com",
+    projectId: "prova1-96428",
+    storageBucket: "prova1-96428.appspot.com",
+    messagingSenderId: "572504713660",
+    appId: "1:572504713660:web:1a565064bdf18ef4cee3b9"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  var contatosDB = firebase.database().ref("contatos");
+
+
 var contatos = [];
 
 
-function nextID() {
-    var id = 1;
-    contatos.forEach(function(contato, index) {
-		if (contato.id >= id) id = contato.id + 1;
-	});
-	
-	return id;	
-}
-
-
 function add(){
-    var contato = {"id":nextID(contato),"nome": $("#nome").val(), "telefone":$("#telefone").val()};
+    var contato = {"nome": $("#nome").val(), "telefone":$("#telefone").val()};
 
-    contatos.push(contato);
+    contatosDB.push(contato);
     $("#nome").val("");
     $("#telefone").val("");
 
     list(contato);
 }
 
-function createHTML(contato){
+function createHTML(id, contato){
 
     var html = "";
 
-    html+= "<li class='collection-item '> <div> <i class='material-icons icone'>account_box</i><br/>" + contato.nome + "<br/>" + contato.telefone + " <a class='secondary-content' onclick='del(" + contato.id + ")'><i class='material-icons iconedel'>delete</i></a></div></li>";
+    html+= "<li class='collection-item '> <div> <i class='material-icons icone'>account_box</i><br/>" + contato.nome + "<br/>" + contato.telefone + " <a class='secondary-content' onclick='del(event,\"" +id+ "\")'><i class='material-icons iconedel'>delete</i></a></div></li>";
 
     return html;
 
 }
 
 function list(contato){
-    var html = "";
 
-    contatos.forEach(function(contato,index){
-        
-        html += createHTML(contato);
-    })
+    contatosDB.once("value",function(contato){    
 
-    $("#contatos").html(html);
+        var html = "";
+
+        contatos.forEach(function(contato,index){
+            
+            html += createHTML(contato.key,contato.val());
+        })
+
+        $("#contatos").html(html);
+
+    });
 }
 
 function del(id) {
 
-    var contato = {"id":id,"nome": $("#nome").val(), "telefone":$("#telefone").val()};
-		
-	contatos.forEach(function(contato, index) {
-		if (contato.id == id) contatos.splice(index, 1);
-	});
+    evt.stopPropagation();
+	contatosDB.child(id).remove();
 	
 	
 	list(contato);
